@@ -25,23 +25,24 @@
               </div>
           </div>
           <form
-            action="#"
+            action="{% url 'home:contact' %}"
             class="widget-form contact_form"
             method="POST"
             id="main_contact_form"
-          >
+          > {% csrf_token %}
             <h6>Feel free to contact any time.</h6>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptates, repudiandae.
-            </p>
-            <div
-              class="alert alert-success contact_msg"
-              style="display: none"
-              role="alert"
-            >
-              Your message was sent successfully.
-            </div>
+            <!---------------------------------------------------------->
+<!--            TODO: Add passed messages-->
+              <div>
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-success contact_msg" style="display: none" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            <!---------------------------------------------------------->
             <div class="form-group">
               <input
                 type="text"
