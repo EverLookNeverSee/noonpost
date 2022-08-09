@@ -137,10 +137,10 @@
                     <h5>Subscribe to our Newslatter</h5>
                     <p> Sign up for free and be the first to get notified about new posts. </p>
                 </div>
-                <form action="#" class="newslettre-form">
+                <form action="{% url 'home:newsletter' %}" method="post" class="newslettre-form"> {% csrf_token %}
                     <div class="form-flex">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your email adress" required="required">
+                            <input name="email" type="email" class="form-control" placeholder="Your email adress" required="required">
                         </div>
                         <button class="submit-btn" type="submit">Subscribe</button>
                     </div>
