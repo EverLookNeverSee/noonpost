@@ -32,3 +32,10 @@ def login_view(request):
     else:
         messages.add_message(request, messages.WARNING, "You are already logged In.")
         return redirect('/')
+
+
+@login_required(login_url='/accounts/login')
+def logout_view(request):
+    logout(request)
+    messages.add_message(request, messages.SUCCESS, 'You are now logged out!')
+    return redirect('/')
