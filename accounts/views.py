@@ -25,7 +25,7 @@ def login_view(request):
             else:
                 messages.add_message(request, messages.ERROR, 'Your entered information was wrong!')
                 return render(request, 'accounts/login.html', {'form': form})
-        else:
+        elif request.method == "GET":
             form = UserLoginForm()
             context = {'form': form}
             return render(request, 'accounts/login.html', context)
