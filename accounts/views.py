@@ -39,3 +39,21 @@ def logout_view(request):
     logout(request)
     messages.add_message(request, messages.SUCCESS, 'You are now logged out!')
     return redirect('/')
+
+
+def signup_view(request):
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            form = UserRegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.add_message(request, messages.SUCCESS, 'You are now registered!')
+                return redirect('/')
+            else:
+                messages.add_message(request, messages.ERROR, 'Your entered information was wrong!')
+        form = UserRegisterForm()
+        context = {'form': form}
+        return render(request, 'accounts/signup.html', context)
+    else:
+        messages.add_message(request, messages.WARNING, 'You are already logged in!')
+        return redirect('/')
