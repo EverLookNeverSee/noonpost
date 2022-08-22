@@ -69,6 +69,13 @@
 								<li><a href="#">Blog</a></li>
 								<li><a href="{% url 'home:about' %}">About Me</a></li>
 								<li><a href="{% url 'home:contact' %}">Contact</a></li>
+								{% if request.user.is_authenticated %}
+								<li class="active"><a href="#">Loggid in as {{ request.user.username}}</a></li>
+								<li class="active"><a href="{% url 'accounts:logout' %}">Logout</a></li>
+								{% else %}
+								<li class="active"><a href="{% url 'accounts:login' %}">Login</a></li>
+								<li class="active"><a href="{% url 'accounts:signup' %}">SignUp</a></li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
