@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{% url 'accounts:login'%}", method="post">{% csrf_token %}
+    <div class="form-inline">
+        <label for="username">Username or Email</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+    </div>
+    <div class="form-inline">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+    </div>
+    <div class="form-inline">
+        <label>Remember me</label>
+        <input type="checkbox" class="form-control"  name="remember_me" placeholder="Password">
+    </div>
+    <div class="form-inline">
+        <a href="#">Forgot password?</a>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock content%}
