@@ -139,3 +139,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'home:index'
+
+
+# Authentication Backends
+AUTHENTICATION_BACKENDS = ["accounts.backends.EmailBackend"]
+
+
+# email configs
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = str(os.getenv("EMAIL_HOST"))
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_PORT = 587
+EMAIL_HOST_USER = str(os.getenv("EMAIL_HOST_USER"))
+EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_HOST_PASSWORD"))
