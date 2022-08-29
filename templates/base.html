@@ -66,7 +66,7 @@
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
 								<li><a href="{% url 'home:index' %}">Home</a></li>
-								<li><a href="#">Blog</a></li>
+								<li><a href="{% url 'blog:index' %}">Blog</a></li>
 								<li><a href="{% url 'home:about' %}">About Me</a></li>
 								<li><a href="{% url 'home:contact' %}">Contact</a></li>
 								{% if request.user.is_authenticated %}
