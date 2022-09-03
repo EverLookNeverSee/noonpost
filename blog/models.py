@@ -49,7 +49,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_date']
+        ordering = ['-created_at']
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
 
