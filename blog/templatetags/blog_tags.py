@@ -23,3 +23,14 @@ def get_published_posts() -> List[Post]:
     :return: List, published posts
     """
     return Post.objects.filter(ok_to_publish=True)
+
+
+@register.filter
+def summary(value, word_count) -> str:
+    """
+    Summarizing the string
+    :param value: str, string object
+    :param word_count: int, first word_count number of characters
+    :return: str, summarized string
+    """
+    return f"{value[:word_count]}..."
