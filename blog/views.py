@@ -41,3 +41,29 @@ def get_previous_next_posts(pid):
     next_post = Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date').filter(
         publish_date__gte=post.publish_date).exclude(id=pid).last()
     return previous_post, next_post
+
+
+def blog_single(request, pid):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.post = get_object_or_404(Post, id=pid)
+            new_form.save()
+            messages.add_message(request, messages.SUCCESS, "Comment added successfully.")
+        else:
+            messages.add_message(request, messages.ERROR, "Error adding comment!")
+    post = get_object_or_404(Post, id=pid, ok_to_publish=True, publish_date__lte=timezone.now())
+    if post.login_required is False:
+        comments = Comment.objects.filter(post=post.id, is_approved=True)
+        increment_views(pid)
+        form = CommentForm()
+        context = {"post": post, "comments:": comments, "form": form}
+        previous_post, next_post = get_previous_next_posts(pid)
+        if previous_post:
+            context["previous_post"] = previous_post
+        if next_post:
+            context["next_post"] = next_post
+        return render(request, "blog/blog-single.html", context)
+    else:
+        return HttpResponseRedirect(reverse("accounts:login"))
