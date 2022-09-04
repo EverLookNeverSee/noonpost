@@ -32,3 +32,12 @@ def increment_views(pid):
     post = get_object_or_404(Post, id=pid)
     post.count_views += 1
     post.save()
+
+
+def get_previous_next_posts(pid):
+    post = get_object_or_404(Post, id=pid)
+    previous_post = Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date').filter(
+        publish_date__lte=post.publish_date).exclude(id=pid).first()
+    next_post = Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date').filter(
+        publish_date__gte=post.publish_date).exclude(id=pid).last()
+    return previous_post, next_post
