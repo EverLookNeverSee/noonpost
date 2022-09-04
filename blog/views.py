@@ -28,5 +28,7 @@ def blog_index(request, **kwargs):
     return render(request, "blog/blog-home.html", context)
 
 
-def blog_single(request):
-    return render(request, "blog/blog-single.html")
+def increment_views(pid):
+    post = get_object_or_404(Post, id=pid)
+    post.count_views += 1
+    post.save()
