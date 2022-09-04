@@ -59,7 +59,11 @@ def home_latest_posts(count=6) -> Dict[str, List[Post]]:
 
 
 @register.inclusion_tag("blog/blog-posts-categories.html")
-def posts_categories():
+def posts_categories() -> Dict[str, Dict]:
+    """
+    Posts categories
+    :return: dict, posts categories
+    """
     posts = Post.objects.filter(ok_to_publish=True)
     categories = Category.objects.all()
     cat_dict = dict()
