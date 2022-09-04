@@ -67,3 +67,12 @@ def blog_single(request, pid):
         return render(request, "blog/blog-single.html", context)
     else:
         return HttpResponseRedirect(reverse("accounts:login"))
+
+
+def blog_search(request):
+    posts = Post.objects.filter(ok_to_publish=True, publish_date__lte=timezone.now()).order_by('-publish_date')
+    if request.method == "GET":
+        if s := request.GET.get("s"):
+            posts = posts.filter(content__icontains=s)
+    context = {"posts": posts}
+    return render(request, "blog/blog-home.html", context)
