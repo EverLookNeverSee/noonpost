@@ -45,3 +45,14 @@ def blog_latest_posts(count=6) -> Dict[str, List[Post]]:
     """
     posts = Post.objects.filter(ok_to_publish=True).order_by("-publish_date")[:count]
     return {"posts": posts}
+
+
+@register.inclusion_tag("website/home-latest-posts.html")
+def home_latest_posts(count=6) -> Dict[str, List[Post]]:
+    """
+    Latest published posts for home page
+    :param count: int, number of the latest posts that we want to return
+    :return: List, latest published posts
+    """
+    posts = Post.objects.filter(ok_to_publish=True).order_by("-publish_date")[:count]
+    return {"posts": posts}
