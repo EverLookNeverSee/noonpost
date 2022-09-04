@@ -47,7 +47,7 @@ def blog_latest_posts(count=6) -> Dict[str, List[Post]]:
     return {"posts": posts}
 
 
-@register.inclusion_tag("home/home-latest-posts.html")
+@register.inclusion_tag("home/latest_posts.html")
 def home_latest_posts(count=6) -> Dict[str, List[Post]]:
     """
     Latest published posts for home page
