@@ -56,3 +56,13 @@ def home_latest_posts(count=6) -> Dict[str, List[Post]]:
     """
     posts = Post.objects.filter(ok_to_publish=True).order_by("-publish_date")[:count]
     return {"posts": posts}
+
+
+@register.inclusion_tag("blog/blog-posts-categories.html")
+def posts_categories():
+    posts = Post.objects.filter(ok_to_publish=True)
+    categories = Category.objects.all()
+    cat_dict = dict()
+    for name in categories:
+        cat_dict[name] = posts.filter(category=name).count()
+    return {"categories": cat_dict}
