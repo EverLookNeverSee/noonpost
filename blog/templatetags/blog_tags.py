@@ -89,4 +89,5 @@ def top_viewed_posts(count=3) -> Dict[str, List[Post]]:
     :param count: int, number of top viewed posts that we want to return
     :return: List, top viewed posts
     """
-    return Post.objects.filter(ok_to_publish=True).order_by("-count_views")[:count]
+    posts = Post.objects.filter(ok_to_publish=True).order_by("-count_views")[:count]
+    return {"posts": posts}
