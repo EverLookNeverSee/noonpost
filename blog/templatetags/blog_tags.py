@@ -47,7 +47,7 @@ def blog_latest_posts(count=6) -> Dict[str, List[Post]]:
     return {"posts": posts}
 
 
-@register.inclusion_tag("website/home-latest-posts.html")
+@register.inclusion_tag("home/home-latest-posts.html")
 def home_latest_posts(count=6) -> Dict[str, List[Post]]:
     """
     Latest published posts for home page
@@ -80,3 +80,13 @@ def get_comments_count(pid) -> int:
     :return: int, number of approved comments of the post
     """
     return Comment.objects.filter(post=pid, is_approved=True).count()
+
+
+@register.inclusion_tag("home/top_viewed_posts.html")
+def top_viewed_posts(count=3) -> Dict[str, List[Post]]:
+    """
+    Top viewed posts
+    :param count: int, number of top viewed posts that we want to return
+    :return: List, top viewed posts
+    """
+    return Post.objects.filter(ok_to_publish=True).order_by("-count_views")[:count]
