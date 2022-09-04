@@ -70,3 +70,13 @@ def posts_categories() -> Dict[str, Dict]:
     for name in categories:
         cat_dict[name] = posts.filter(category=name).count()
     return {"categories": cat_dict}
+
+
+@register.simple_tag(name="comments_count")
+def get_comments_count(pid) -> int:
+    """
+    Get the number of approved comments of a post
+    :param pid: Post id
+    :return: int, number of approved comments of the post
+    """
+    return Comment.objects.filter(post=pid, is_approved=True).count()
