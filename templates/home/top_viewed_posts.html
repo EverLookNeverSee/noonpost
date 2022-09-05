@@ -1,3 +1,4 @@
+{% load humanize %}
 <aside id="colorlib-hero">
 			<div class="flexslider">
 				<ul class="slides">
@@ -10,11 +11,13 @@
 				   				<div class="slider-text-inner">
 				   					<div class="desc">
 				   						<p class="meta">
-												<span class="cat">Top viewed posts</span>
-												<span class="date">{{ post.publish_date|date:"d M Y" }}</span>
-												<span class="pos">By {{ post.author }}</span>
+											{% for cat in post.category.all %}
+												<span class="cat"><a href="{% url 'blog:category' cat_name=cat.name %}">{{ cat.name }}</a></span>{% if not forloop.last %},{% endif %}
+											{% endfor %}
+												<span class="date">{{ post.publish_date|naturaltime }}</span>
+												<span class="pos">By <a href="{% url 'blog:author' author_username=post.author.username %}">{{ post.author }}</a></span>
 											</p>
-					   					<h1>{{ post.title }}</h1>
+					   					<h1><a href="{% url 'blog:single' pid=post.id %}">{{ post.title }}</a></h1>
 				   					</div>
 				   				</div>
 				   			</div>
