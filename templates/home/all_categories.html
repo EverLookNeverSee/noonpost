@@ -1,6 +1,6 @@
 <h2>Categories</h2>
 <p class="tags">
     {% for category in categories %}
-    <span><a href="#"><i class="icon-tag"></i>{{ category.name }}</a></span>
+    <span><a href="{% url 'blog:category' cat_name=category.name %}"><i class="icon-tag"></i>{{ category.name }}</a></span>
     {% endfor %}
 </p>
