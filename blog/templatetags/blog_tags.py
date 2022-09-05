@@ -72,6 +72,12 @@ def posts_categories() -> Dict[str, Dict]:
     return {"categories": cat_dict}
 
 
+@register.inclusion_tag("home/all_categories.html")
+def all_categories():
+    categories = Category.objects.all()
+    return {"categories": categories}
+
+
 @register.simple_tag(name="comments_count")
 def get_comments_count(pid) -> int:
     """
