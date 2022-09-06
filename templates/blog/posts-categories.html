@@ -1,0 +1,8 @@
+<h2 class="sidebar-heading">Categories</h2>
+<p>
+<ul class="category">
+    {% for name, count in categories.items %}
+    <li><a href="#"><i class="icon-check"></i>{{ name }}:  {{ count }} items</a></li>
+    {% endfor %}
+</ul>
+</p>
