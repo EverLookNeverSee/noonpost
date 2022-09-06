@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blog_tags %}
+{% load humanize %}
 {% block content %}
 		<aside id="colorlib-breadcrumbs">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 breadcrumbs text-center">
-						<h2>Blog detail</h2>
+						<h2>Blog post detail</h2>
 						<p><span><a href="{% url 'home:index' %}">Home</a></span> / <span><a href="{% url 'blog:index' %}">Blog </a></span> / <span>Blog Single</span></p>
 					</div>
 				</div>
@@ -20,21 +22,18 @@
 							<div class="col-md-12">
 								<div class="blog-entry">
 									<div class="blog-img blog-detail">
-										<img src="{% static 'assets/images/blog-4.jpg' %}" class="img-responsive" alt="html5 bootstrap template">
+										<img src="{{ post.image.url }}" class="img-responsive" alt="html5 bootstrap template">
 									</div>
 									<div class="desc">
-										<p class="meta">
-											<span class="cat"><a href="#">Events</a></span>
-											<span class="date">20 March 2018</span>
-											<span class="pos">By <a href="#">Rich</a></span>
+										<p>
+											{% for cat in post.category.all %}
+											<span class="cat"><a href="{% url 'blog:category' cat_name=cat.name %}">{{ cat.name }}</a></span>{% if not forloop.last %},{% endif %}
+											{% endfor %}
+											<span class="date">{{ post.publish_date|naturaltime }}</span>
+											<span class="pos">By <a href="{% url 'blog:author' author_username=post.author.username %}">{{ post.author.username }}</a></span>
 										</p>
-										<h2><a href="blog.html">Recipe for your site</a></h2>
-										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way. </p>
-										<blockquote>
-											A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-										</blockquote>
-										<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way. </p>
+										<h2>{{ post.title }}</h2>
+										<p>{{ post.content|safe }}</p>
 									</div>
 								</div>
 							</div>
