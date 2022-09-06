@@ -69,7 +69,7 @@ def home_latest_posts(count=6) -> Dict[str, List[Post]]:
     return {"posts": posts}
 
 
-@register.inclusion_tag("blog/blog-posts-categories.html")
+@register.inclusion_tag("blog/posts-categories.html")
 def posts_categories() -> Dict[str, Dict]:
     """
     Posts categories
