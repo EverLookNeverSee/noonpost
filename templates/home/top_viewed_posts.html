@@ -11,11 +11,15 @@
 				   				<div class="slider-text-inner">
 				   					<div class="desc">
 				   						<p>
-											{% for cat in post.category.all %}
+												{% for cat in post.category.all %}
 												<span class="cat"><a href="{% url 'blog:category' cat_name=cat.name %}">{{ cat.name }}</a></span>{% if not forloop.last %},{% endif %}
-											{% endfor %}
+												{% endfor %}
+												<span>|</span>
 												<span class="date">{{ post.publish_date|naturaltime }}</span>
+												<span>|</span>
 												<span class="pos">By <a href="{% url 'blog:author' author_username=post.author.username %}">{{ post.author }}</a></span>
+												<span>|</span>
+												<span class="pos">{{ post.count_views }} views</span>
 											</p>
 					   					<h1><a href="{% url 'blog:single' pid=post.id %}">{{ post.title }}</a></h1>
 				   					</div>
