@@ -62,29 +62,39 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h2 class="heading-2">Say something</h2>
-								<form action="#">
+								<form action="{% url 'blog:single' pid=post.id %}", method="post">{% csrf_token %}
+									<!--------------------------------------------------------------------------------->
+									{% if request.user.is_authenticated %}
 									<div class="row form-group">
 										<div class="col-md-6">
-											<!-- <label for="fname">First Name</label> -->
-											<input type="text" id="fname" class="form-control" placeholder="Your firstname">
-										</div>
-										<div class="col-md-6">
-											<!-- <label for="lname">Last Name</label> -->
-											<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+											<input type="hidden" name="name" value="{{ request.user.get_full_name }}">
 										</div>
 									</div>
 
 									<div class="row form-group">
 										<div class="col-md-12">
-											<!-- <label for="email">Email</label> -->
-											<input type="text" id="email" class="form-control" placeholder="Your email address">
+											<input type="hidden" name="email" value="{{ request.user.email }}">
+										</div>
+									</div>
+									{% else %}
+									<!--------------------------------------------------------------------------------->
+									<div class="row form-group">
+										<div class="col-md-6">
+											<input type="text" id="name" name="name" class="form-control" placeholder="Fullname">
 										</div>
 									</div>
 
+									<div class="row form-group">
+										<div class="col-md-12">
+											<input type="email" name="email" class="form-control" placeholder="Your email address">
+										</div>
+									</div>
+									{% endif %}
+									<!--------------------------------------------------------------------------------->
 									<div class="row form-group">
 										<div class="col-md-12">
 											<!-- <label for="subject">Subject</label> -->
-											<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+											<input type="text" id="subject" name="subject" class="form-control" placeholder="Your subject of this message">
 										</div>
 									</div>
 
