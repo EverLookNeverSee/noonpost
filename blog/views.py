@@ -58,7 +58,7 @@ def blog_single(request, pid):
         comments = Comment.objects.filter(post=post.id, is_approved=True)
         increment_views(pid)
         form = CommentForm()
-        context = {"post": post, "comments:": comments, "form": form}
+        context = {"post": post, "comments": comments, "form": form}
         previous_post, next_post = get_previous_next_posts(pid)
         if previous_post:
             context["previous_post"] = previous_post
