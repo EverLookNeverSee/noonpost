@@ -44,46 +44,19 @@
 						</div>
 						<div class="row row-pb-lg">
 							<div class="col-md-12">
-								<h2 class="heading-2">23 Comments</h2>
+								<h2 class="heading-2">{% comments_count pid=post.id %} Comments</h2>
+								{% for comment in comments %}
 								<div class="review">
-						   		<div class="user-img" style="background-image: url({% static 'assets/images/person1.jpg' %})"></div>
-						   		<div class="desc">
-						   			<h4>
-						   				<span class="text-left">Jacob Webb</span>
-						   				<span class="text-right">24 March 2018</span>
-						   			</h4>
-						   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-						   			<p class="star">
-					   					<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-						   			</p>
-						   		</div>
-						   	</div>
-						   	<div class="review">
-						   		<div class="user-img" style="background-image: url({% static 'assets/images/person2.jpg' %})"></div>
-						   		<div class="desc">
-						   			<h4>
-						   				<span class="text-left">Jacob Webb</span>
-						   				<span class="text-right">24 March 2018</span>
-						   			</h4>
-						   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-						   			<p class="star">
-					   					<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-						   			</p>
-						   		</div>
-						   	</div>
-						   	<div class="review">
-						   		<div class="user-img" style="background-image: url({% static 'assets/images/person3.jpg' %})"></div>
-						   		<div class="desc">
-						   			<h4>
-						   				<span class="text-left">Jacob Webb</span>
-						   				<span class="text-right">24 March 2018</span>
-						   			</h4>
-						   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-						   			<p class="star">
-					   					<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-						   			</p>
-						   		</div>
-						   	</div>
+						   			<div class="user-img" style="background-image: url({% static 'assets/images/user.png' %})"></div>
+						   				<div class="desc">
+						   					<h4>
+						   						<span class="text-left">{{ comment.name }}</span>
+						   						<span class="text-right">{{ comment.created_at }}</span>
+											</h4>
+											<p>{{ comment.message }}</p>
+						   			</div>
+								</div>
+								{% endfor %}
 							</div>
 						</div>
 						<div class="row">
