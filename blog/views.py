@@ -6,6 +6,7 @@ from blog.models import Post, Comment
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 
 
 def blog_index(request, **kwargs):
@@ -73,6 +74,6 @@ def blog_search(request):
     posts = Post.objects.filter(ok_to_publish=True, publish_date__lte=timezone.now()).order_by('-publish_date')
     if request.method == "GET":
         if s := request.GET.get("s"):
-            posts = posts.filter(content__icontains=s)
+            posts = posts.filter(Q(title__icontains=s) | Q(content__icontains=s))
     context = {"posts": posts}
     return render(request, "blog/blog-home.html", context)
