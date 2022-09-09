@@ -55,19 +55,22 @@ def blog_single(request, pid):
         else:
             messages.add_message(request, messages.ERROR, "Error adding comment!")
     post = get_object_or_404(Post, id=pid, ok_to_publish=True, publish_date__lte=timezone.now())
+    comments = Comment.objects.filter(post=post.id, is_approved=True)
+    increment_views(pid)
+    form = CommentForm()
+    context = {"post": post, "comments": comments, "form": form}
+    # previous_post, next_post = get_previous_next_posts(pid)
+    # if previous_post:
+    #     context["previous_post"] = previous_post
+    # if next_post:
+    #     context["next_post"] = next_post
     if post.login_required is False:
-        comments = Comment.objects.filter(post=post.id, is_approved=True)
-        increment_views(pid)
-        form = CommentForm()
-        context = {"post": post, "comments": comments, "form": form}
-        previous_post, next_post = get_previous_next_posts(pid)
-        if previous_post:
-            context["previous_post"] = previous_post
-        if next_post:
-            context["next_post"] = next_post
         return render(request, "blog/blog-single.html", context)
     else:
-        return HttpResponseRedirect(reverse("accounts:login"))
+        if request.user.is_authenticated:
+            return render(request, "blog/blog-single.html", context)
+        else:
+            return HttpResponseRedirect(reverse("accounts:login"))
 
 
 def blog_search(request):
