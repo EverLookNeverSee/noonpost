@@ -149,8 +149,10 @@
 							</div>
 							<div class="side">
 								<div class="form-group">
-									<input type="text" class="form-control form-email text-center" id="email" placeholder="Enter your email">
-									<button type="submit" class="btn btn-primary btn-subscribe">Subscribe</button>
+									<form action="{% url 'home:newsletter' %}" method="post">{% csrf_token %}
+										<input type="email" name="email" class="form-control form-email text-center" id="email" placeholder="Enter your email">
+										<button type="submit" class="btn btn-primary btn-subscribe">Subscribe to newsletter</button>
+									</form>
 								</div>
 							</div>
 						</div>
