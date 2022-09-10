@@ -21,6 +21,10 @@ from django.contrib.sitemaps.views import sitemap
 from home.sitemaps import StaticViewSitemap
 
 
+sitemaps = {
+    'static': StaticViewSitemap,
+}
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
