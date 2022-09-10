@@ -35,12 +35,15 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'multi_captcha_admin',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
     'home',
     'accounts',
     'taggit',
@@ -61,6 +64,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'noonpost.urls'
+
+SITE_ID = 2
 
 TEMPLATES = [
     {
