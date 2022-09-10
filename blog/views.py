@@ -51,10 +51,23 @@ def blog_single(request, pid):
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
-            new_form = form.save(commit=False)
-            new_form.post = get_object_or_404(Post, id=pid)
-            new_form.save()
-            messages.add_message(request, messages.SUCCESS, "Comment added successfully.")
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.RECAPTCHA_PRIVATE_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req = urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            if not result['success']:
+                messages.add_message(request, messages.ERROR, "Invalid reCAPTCHA. Please try again.")
+            elif result['success']:
+                new_form = form.save(commit=False)
+                new_form.post = get_object_or_404(Post, id=pid)
+                new_form.save()
+                messages.add_message(request, messages.SUCCESS, "Comment added successfully.")
         else:
             messages.add_message(request, messages.ERROR, "Error adding comment!")
     post = get_object_or_404(Post, id=pid, ok_to_publish=True, publish_date__lte=timezone.now())
