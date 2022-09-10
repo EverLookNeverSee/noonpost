@@ -1,4 +1,7 @@
+import json
+import urllib
 from django.urls import reverse
+from django.conf import settings
 from django.utils import timezone
 from blog.forms import CommentForm
 from django.contrib import messages
