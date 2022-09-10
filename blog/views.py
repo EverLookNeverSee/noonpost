@@ -74,7 +74,8 @@ def blog_single(request, pid):
     comments = Comment.objects.filter(post=post.id, is_approved=True)
     increment_views(pid)
     form = CommentForm()
-    context = {"post": post, "comments": comments, "form": form}
+    PUBLIC_KEY = settings.RECAPTCHA_PUBLIC_KEY
+    context = {"post": post, "comments": comments, "form": form, 'PUBLIC_KEY': PUBLIC_KEY}
     # previous_post, next_post = get_previous_next_posts(pid)
     # if previous_post:
     #     context["previous_post"] = previous_post
