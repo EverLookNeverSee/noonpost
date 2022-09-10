@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'django_summernote',
     'blog',
     'django.contrib.humanize',
-    'snowpenguin.django.recaptcha2'
+    'snowpenguin.django.recaptcha2',
+    'robots'
 ]
 
 MIDDLEWARE = [
