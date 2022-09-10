@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,8 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'blog',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
+    'snowpenguin.django.recaptcha2'
 ]
 
 MIDDLEWARE = [
