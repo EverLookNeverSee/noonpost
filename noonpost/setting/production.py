@@ -26,3 +26,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 STATICFILES_DIRS = [
     BASE_DIR / "statics",
 ]
+
+DEFAULT_FROM_EMAIL = "contact"
+SERVER_EMAIL = "noonpost"
