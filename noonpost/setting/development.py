@@ -7,7 +7,7 @@ SECRET_KEY = str(os.getenv("SECRET_KEY_DEV"))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.getenv("DEBUG"))
+DEBUG = True
 
 ALLOWED_HOSTS = [str(os.getenv("ALLOWED_HOSTS_DEV"))]
 
@@ -34,8 +34,3 @@ STATICFILES_DIRS = [
 
 DEFAULT_FROM_EMAIL = "dev"
 SERVER_EMAIL = "noonpost"
-
-
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
