@@ -1,4 +1,5 @@
 {% load static %}
+{% load compress %}
 {% load humanize %}
 {% load blog_tags %}
 <!DOCTYPE HTML>
@@ -16,7 +17,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 		<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
-
+	{% compress css %}
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
 	<!-- Icomoon Icon Fonts-->
@@ -36,13 +37,13 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+		{% endcompress %}
 
-	<!-- Modernizr JS -->
+		{% compress js %}
 	<script src="{% static 'assets/js/modernizr-2.6.2.min.js' %}"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
 	<script src="{% static 'assets/js/respond.min.js' %}"></script>
-	<![endif]-->
+	{% endcompress %}
+
 
 	</head>
 	<body>
@@ -155,6 +156,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 	</div>
 
+	{% compress js %}
 	<!-- jQuery -->
 	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
 	<!-- jQuery Easing -->
@@ -172,6 +174,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{% static 'assets/js/magnific-popup-options.js' %}"></script>
 	<!-- Main -->
 	<script src="{% static 'assets/js/main.js' %}"></script>
+	{% endcompress %}
 
 	</body>
 </html>
