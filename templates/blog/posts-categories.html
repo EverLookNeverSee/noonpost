@@ -2,7 +2,7 @@
 <p>
 <ul class="category">
     {% for name, count in categories.items %}
-    <li><a href="#"><i class="icon-check"></i>{{ name }}:  {{ count }} items</a></li>
+    <li><a href="{% url 'blog:category' cat_name=name %}"><i class="icon-check"></i>{{ name }}:  {{ count }} posts</a></li>
     {% endfor %}
 </ul>
 </p>
